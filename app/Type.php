@@ -31,7 +31,7 @@ class Type extends Model
       $result[$key] = [
         'id' => $row['pt_id'],
         'name' => $row['pt_name_tw'],
-        'pic' => empty($row['pt_pic']) ? '' : URL::asset('storage/b1594959238hmBELY.jpg'),
+        'pic' => empty($row['pt_pic']) ? '' : URL::asset('storage/upload/type/b'.$row['pt_pic']),
         'subtype' => $subtypeData
       ];
     }
