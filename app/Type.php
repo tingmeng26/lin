@@ -31,7 +31,7 @@ class Type extends Model
       $result[$key] = [
         'id' => $row['pt_id'],
         'name' => $row['pt_name_tw'],
-        'pic' => empty($row['pt_pic']) ? '' : URL::asset('storage/upload/type/b'.$row['pt_pic']),
+        'pic' => empty($row['pt_pic']) ? '' : URL::asset('storage/upload/type/b' . $row['pt_pic']),
         'subtype' => $subtypeData
       ];
     }
@@ -49,8 +49,15 @@ class Type extends Model
 
   public static function test()
   {
-    var_dump(URL::asset('upload/product/b1595559303A5mW9t.jpg'));exit;
+    var_dump(URL::asset('upload/product/b1595559303A5mW9t.jpg'));
+    exit;
     var_dump(Config::get('app.url'));
     exit;
+  }
+
+  public static function getMaxInd()
+  {
+    $max = Type::max('pt_ind');
+    return $max == 0 ? 1 : $max + 5;
   }
 }

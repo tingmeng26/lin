@@ -9,4 +9,8 @@ class Subtype extends Model
     protected $table = 'product_stype';
     protected $primaryKey ='ps_id';
     public $timestamps = false;
+
+    public function type(){
+      return $this->belongsTo('App\Type', 'pt_id', 'pt_id');
+    }
 }
