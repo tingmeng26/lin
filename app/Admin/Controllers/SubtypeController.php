@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Config;
 
 class SubtypeController extends AdminController
 {
@@ -32,9 +33,7 @@ class SubtypeController extends AdminController
     $grid->column('ps_name_tw', __('名稱 tw'));
     $grid->column('ps_name_jp', __('名稱 jp'));
     $grid->column('type.pt_name_tw', __('父項名稱'));
-    $grid->column('ps_ispublic', __('Ps ispublic'))->display(function ($ispublic) {
-      return $ispublic == '1' ? '是' : '否';
-    });
+    $grid->column('ps_ispublic', __('Ps ispublic'))->using(Config::get('parameter.IS_PUBLIC'));
     // $grid->column('ps_ind', __('Ps ind'));
     $grid->column('ps_link', __('連結'));
     $grid->column('ps_admin', __('管理者'));

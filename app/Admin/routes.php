@@ -1,5 +1,6 @@
 <?php
 
+use App\Subtype;
 use Illuminate\Routing\Router;
 
 Admin::routes();
@@ -14,5 +15,8 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('types', TypeController::class); 
     $router->resource('subtypes', SubtypeController::class);
+    $router->resource('products', ProductController::class);
+
+    $router->get('/test',Subtype::list());
 
 });

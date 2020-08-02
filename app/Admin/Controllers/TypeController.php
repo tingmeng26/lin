@@ -81,33 +81,46 @@ class TypeController extends AdminController
   protected function form()
   {
     $form = new Form(new Type());
-    $form->text('pt_name_en', __('Pt name en'));
-    $form->text('pt_name_tw', __('Pt name tw'));
-    $form->text('pt_name_jp', __('Pt name jp'));
-    $ispublic = [
-      '1' => '是',
-      '0' => '否'
-    ];
-    $form->select('pt_ispublic', '公開')->options($ispublic)->default('1');
-    $form->image('pt_pic', '圖片')
-      ->uniqueName()
-    //   ->name(function ($file) {
-    //     return 'test.'.$file->guessExtension();
-    // })
-      ->removable()
-      ->move('upload/test/')
-      ->help('Photo尺寸:420 * 380')
-      ->rules('image');
+
+    $form->tab('Basic columns', function ($form) {
+      $form->text('pt_name_en', __('Pt name en'));
+      $form->text('pt_name_tw', __('Pt name tw'));
+      $form->text('pt_name_jp', __('Pt name jp'));
+      $ispublic = [
+        '1' => '是',
+        '0' => '否'
+      ];
+      $form->select('pt_ispublic', '公開')->options($ispublic)->default('1');
+      $form->image('pt_pic', '圖片')
+        ->uniqueName()
+        //   ->name(function ($file) {
+        //     return 'test.'.$file->guessExtension();
+        // })
+        ->removable()
+        ->move('upload/test/')
+        ->help('Photo縮圖尺寸:100 * 100')
+        ->rules('image')
+        ->thumbnail('small', $width = 100, $height = 100);
+    });
     // $form->number('pt_ispublic', __('Pt ispublic'))->default(1);
     // $form->number('pt_ind', __('Pt ind'));
     // $form->text('pt_pic', __('Pt pic'));
     // $form->text('pt_admin', __('Pt admin'));
     // $form->datetime('pt_updatetime', __('Pt updatetime'))->default(date('Y-m-d H:i:s'));
     // $form->datetime('pt_createtime', __('Pt createtime'))->default(date('Y-m-d H:i:s'));
-    $form->hidden('pt_ind')->default(Type::getMaxInd());
-    $form->hidden('pt_updatetime')->value(date('Y-m-d H:i:s'));
-    $form->hidden('pt_createtime')->default(date('Y-m-d H:i:s'));
-    $form->hidden('pt_admin')->default(Auth::user());
+
+    // $form->hidden('pt_ind')->default(Type::getMaxInd());
+    // $form->hidden('pt_updatetime')->value(date('Y-m-d H:i:s'));
+    // $form->hidden('pt_createtime')->default(date('Y-m-d H:i:s'));
+    // $form->hidden('pt_admin')->default(Auth::user());
+
+    $form->tab('Hidden columns', function ($form) {
+
+      $form->text('pt_ind')->default(Type::getMaxInd());
+      $form->text('pt_updatetime')->value(date('Y-m-d H:i:s'));
+      $form->text('pt_createtime')->default(date('Y-m-d H:i:s'));
+      $form->text('pt_admin')->default(Auth::user());
+    });
     return $form;
   }
 }
