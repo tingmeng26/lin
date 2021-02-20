@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Product;
 use App\Subtype;
+use App\Type;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -182,9 +183,9 @@ class ProductController extends AdminController
             $form->text('product_id', __('ID'))->readonly();
             // $form->number('product_ind', __('Product ind'));
             $array = ['1'=>'1','7'=>'7','15'=>'15'];
-            $form->select('ps_id', __('子分類名稱'))->options(Subtype::list());
-            $form->number('pt_id', __('Pt id'));
-            $form->number('product_tag', __('Product tag'));
+            $form->select('pt_id', __('主分類名稱'))->options(Type::list())->load('ps_id','lists');
+            $form->select('ps_id', __('子分類名稱'));
+            $form->select('product_tag', __('Product tag'))->options(Config::get('parameter.PRODUCT_SNO'));;
             $form->text('product_sno', __('Product sno'));
             // $form->text('product_name_jp', __('Product name jp'));
             // $form->text('product_name_en', __('Product name en'));
@@ -237,7 +238,7 @@ class ProductController extends AdminController
             // $form->textarea('product_content_jp', __('Product content jp'));
             // $form->textarea('product_content_en', __('Product content en'));
             // $form->textarea('product_content_tw', __('Product content tw'));
-            $form->number('product_is_show', __('Product is show'));
+            $form->checkbox('product_is_show', __('公開'))->options([1 => '是']);
             // $form->datetime('product_create_time', __('Product create time'))->default(date('Y-m-d H:i:s'));
             // $form->datetime('product_update_time', __('Product update time'))->default(date('Y-m-d H:i:s'));
             // $form->text('product_admin', __('Product admin'));

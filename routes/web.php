@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('index', 'Page@index');
 Route::get('/','Page@index');
 Route::get('odmoem','Page@odmoem');
 Route::get('products','Page@products');

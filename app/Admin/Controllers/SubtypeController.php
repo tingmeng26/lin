@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Config;
+use Symfony\Component\HttpFoundation\Request;
 
 class SubtypeController extends AdminController
 {
@@ -89,5 +90,12 @@ class SubtypeController extends AdminController
     $form->datetime('ps_createtime', __('Ps createtime'))->default(date('Y-m-d H:i:s'));
 
     return $form;
+  }
+
+
+  public static function getListByTypeId(Request $request){
+    $id = $request->get('q')??0;
+    $list = Subtype::where('pt_id',$id)->get()->toArray();
+    return array_column($list,'ps_name_tw','ps_id');
   }
 }

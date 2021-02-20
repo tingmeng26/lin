@@ -46,7 +46,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse col-lg-7 col-md-9 col-sm-12 mr-auto" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav drop-down-menu">
-                    <li><a href="index.html">
+                    <li><a href="index">
                             <p>首頁</p>
                         </a></li>
                     <li><a href="odmoem">

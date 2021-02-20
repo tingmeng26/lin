@@ -38,6 +38,15 @@ class Type extends Model
     return $result;
   }
 
+  public static function list(){
+    $list =  Type::get()->toArray();
+  $result = [];
+  foreach ($list as $key => $row) {
+    $result[$row['pt_id']] = $row['pt_name_tw'];
+  }
+  return $result;
+  }
+
   /**
    * 透過 type id 取得 subtype list
    * @param integer type id
