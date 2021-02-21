@@ -19,4 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('index', 'Page@index');
 Route::get('/','Page@index');
 Route::get('odmoem','Page@odmoem');
-Route::get('products','Page@products');
+Route::get('type','Page@type');
+Route::get('subtype','Page@subtype');
+// Route::get('subtype/{subtypeId}','Page@subtype')->where(['subtypeId','[0-9]+']);
