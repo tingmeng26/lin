@@ -42,7 +42,7 @@ class Type extends Model
     $list =  Type::get()->toArray();
   $result = [];
   foreach ($list as $key => $row) {
-    $result[$row['pt_id']] = $row['pt_name_tw'];
+    $result[$row['pt_id']] = $row['pt_name'];
   }
   return $result;
   }
