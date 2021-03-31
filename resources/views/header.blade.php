@@ -52,7 +52,7 @@
                     <li><a href="odmoem">
                             <p>產品開發</p>
                         </a></li>
-                    <li><a href="products">
+                    <li><a href="type">
                             <p>商品一覽</p>
                         </a></li>
                     <li class="dropdown">

@@ -75,7 +75,7 @@
             <div class="whitecard-none">
               <div class="products-top">
                 
-                <a href="{{empty($row['subtype'][0]['subtypeId']) ? 'subtype.php' : 'subtype.php?id=' . $row['subtype'][0]['subtypeId'] . '&typeName=' . $row['name'] . '&subtyeName=' . $row['subtype'][0]['subtypeName']}}">
+                <a href="#">
                   <div><img class="products-top-img" src="{{$row['pic']}}"></div>
                   <h4 class="products-top-tittle">{{$row['name']}}</h4>
                 </a>
@@ -83,11 +83,11 @@
               <hr class="green-hr">
               @foreach($row['subtype'] as $value)
 
-                @if(!empty($value['link']))
-                  <a href="{{ $value['link'] }}">
+                @if(!empty($value['ps_id']))
+                  <a href="subtype/{{ $value['ps_id'] }}">
                 @endif
                   <h4>{{$value['ps_name_tw']}}</h4>
-                @if(!empty($value['link']))
+                @if(!empty($value['ps_id']))
                   </a>
                 @endif
               @endforeach
