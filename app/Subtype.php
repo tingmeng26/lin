@@ -31,7 +31,7 @@ class Subtype extends Model
     $list = Subtype::get()->toArray();
     $result  = [];
     foreach ($list as $row) {
-      $result[$row['ps_id']] = $row['ps_name_tw'];
+      $result[$row['ps_id']] = $row['ps_name'];
     }
     return $result;
   }

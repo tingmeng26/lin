@@ -10,6 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
 
 class SubtypeController extends AdminController
@@ -29,11 +30,11 @@ class SubtypeController extends AdminController
   protected function grid()
   {
     $grid = new Grid(new Subtype());
-    $grid->model()->orderBy('ps_id','desc');
+    $grid->model()->orderBy('ps_id', 'desc');
     $grid->column('ps_id', __('ID'))->sortable();
     // $grid->column('pt_id', __('Pt id'));
     $grid->column('ps_name', __('名稱'));
-    $grid->column('type.pt_name', __('大類名稱'));
+    $grid->column('type.pt_name', __('大分類名稱'));
     $grid->column('ps_ispublic', '公開')->using(Config::get('parameter.IS_PUBLIC'));
     // $grid->column('ps_ind', __('Ps ind'));
     // $grid->column('ps_link', __('連結'));
@@ -45,13 +46,13 @@ class SubtypeController extends AdminController
 
       // 去掉删除
       // $actions->disableDelete();
-  
+
       // 去掉编辑
       // $actions->disableEdit();
-  
+
       // 去掉查看
       $actions->disableView();
-  });
+    });
     return $grid;
   }
 
@@ -85,12 +86,12 @@ class SubtypeController extends AdminController
   {
     $form = new Form(new Subtype());
     $form->tab('Basic columns', function ($form) {
-    $form->select('pt_id', __('主分類名稱'))->options(Type::list());
-    $form->text('ps_name', __('子分類名稱'));
-    $form->select('ps_ispublic', __('公開'))->options(Config::get('parameter.IS_PUBLIC'))->default(1);
-    // $form->text('ps_admin', __('Ps admin'));
-    // $form->datetime('ps_updatetime', __('Ps updatetime'))->default(date('Y-m-d H:i:s'));
-    // $form->datetime('ps_createtime', __('Ps createtime'))->default(date('Y-m-d H:i:s'));
+      $form->select('pt_id', __('主分類名稱'))->options(Type::list());
+      $form->text('ps_name', __('子分類名稱'));
+      $form->select('ps_ispublic', __('公開'))->options(Config::get('parameter.IS_PUBLIC'))->default(1);
+      // $form->text('ps_admin', __('Ps admin'));
+      // $form->datetime('ps_updatetime', __('Ps updatetime'))->default(date('Y-m-d H:i:s'));
+      // $form->datetime('ps_createtime', __('Ps createtime'))->default(date('Y-m-d H:i:s'));
     });
 
     $form->tab('Hidden columns', function ($form) {
@@ -104,9 +105,10 @@ class SubtypeController extends AdminController
   }
 
 
-  public static function getListByTypeId(Request $request){
-    $id = $request->get('q')??0;
-    $list = Subtype::where('pt_id',$id)->get()->toArray();
-    return array_column($list,'ps_name_tw','ps_id');
+  public static function getListByTypeId(Request $request)
+  {
+    $id = $request->get('q') ?? 0;
+    $list = Subtype::where('pt_id', $id)->get(['ps_id as id', 'ps_name as text']);
+    return $list;
   }
 }

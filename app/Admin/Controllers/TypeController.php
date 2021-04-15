@@ -32,21 +32,20 @@ class TypeController extends AdminController
     $grid->column('pt_id', 'Id')->sortable();
     $grid->column('pt_name', __('大分類名稱'));
     $grid->column('pt_ispublic', __('公開'))->using(Config::get('parameter.IS_PUBLIC'));
-    $grid->column('subtype', '子分類數量')->display(function ($subtype) {
+    $grid->column('subtype', '小分類數量')->display(function ($subtype) {
       $count = count($subtype);
       return "<span class='label label-warning' onclick=>{$count}</span>";
     });
     // $grid->column('pt_ind', __('Pt ind'));
     // $grid->column('pt_pic', __('Pt pic'));
     $grid->column('pt_pic', '圖片')->display(function($pic){
-      // $path = env('APP_URL')."/storage/upload/test/".$pic;
       $path = env('APP_URL').'/storage/'.$pic;
       return "<image style='width:100px;height:100px' src='{$path}'>";
     });
     // $grid->column('pt_pic','圖片')->image(env('APP_URL')."/storage/upload/test/".$pic,100,100);
     $grid->column('pt_admin', __('最後管理者'));
-    $grid->column('pt_updatetime', __('最後修改時間'))->format('YYYY-MM-DD HH:mm:ss');
-    $grid->column('pt_createtime', __('建立時間'))->format('YYYY-MM-DD HH:mm:ss');
+    $grid->column('pt_updatetime', __('最後修改時間'));
+    $grid->column('pt_createtime', __('建立時間'));
 
     $grid->actions(function ($actions) {
 
