@@ -21,4 +21,12 @@ Route::get('/','Page@index');
 Route::get('odmoem','Page@odmoem');
 Route::get('type','Page@type');
 Route::get('subtype','Page@subtype');
+
+// Route::get('test',function(){
+//   return 'hiii';
+// })->name('sayhi');
+
+// Route::get('test2',function(){
+//  return redirect()->route('sayhi');
+// });
 // Route::get('subtype/{subtypeId}','Page@subtype')->where(['subtypeId','[0-9]+']);
